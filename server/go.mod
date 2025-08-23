@@ -1,4 +1,4 @@
-module sans/server
+module param-vidya/server
 
 go 1.24.4
 
