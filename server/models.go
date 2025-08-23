@@ -14,7 +14,8 @@ type User struct {
 	FirstName string             `bson:"first_name" json:"firstName"`
 	LastName  string             `bson:"last_name" json:"lastName"`
 	UserName  string             `bson:"user_name" json:"userName"`
-	Yajnas    int           	 `bson:"yajnas" json:"yajnas"`
+	Punyas    int           	 `bson:"punyas" json:"punyas"`
+	Vasus     int           	 `bson:"vasus" json:"vasus"`
 	CreatedAt time.Time          `bson:"created_at" json:"createdAt"`
 	UpdatedAt time.Time          `bson:"updated_at" json:"updatedAt"`
 }
@@ -49,4 +50,41 @@ type ErrorResponse struct {
 type SuccessResponse struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data,omitempty"`
+}
+
+type Verse struct {
+	Subtitle 	string `json:"subtitle"`
+	Description string `json:"description"`
+}
+
+type Patha struct {
+	Title 	string `json:"title"`
+	Content []Verse `json:"content"`
+}
+
+type Option struct {
+	Char string `json:"char"`
+	Text string `json:"text"`
+}
+
+type Quiz struct {
+	Question string `json:"question"`
+	Options []Option `json:"options"`
+}
+
+type Chars struct {
+	X_Pos 	int 	`json:"x_pos"`
+	Y_Pos 	int 	`json:"y_pos"`
+	Letter 	string 	`json:"letter"`
+	Visibility bool `json:"visibility"`
+}
+
+type CWord struct {
+	Chars []Chars `json:"chars"`
+	Word  string   `json:"word"`
+}
+
+type Crossword struct {
+	C_Word  CWord 	`json:"c_word"`
+	Orient 	string 	`json:"orient"`
 }

@@ -5,6 +5,7 @@ import { handleError } from "./utils";
 
 function ProtectedRoute({ children }) {
   const [isAuthorized, setIsAuthorized] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     auth().catch(() => setIsAuthorized(false));
@@ -22,6 +23,9 @@ function ProtectedRoute({ children }) {
 
     if (tokenExpiration < now) {
       handleError("Your session has expired. Please log in again.");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
     } else {
       setIsAuthorized(true);
     }
