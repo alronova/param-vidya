@@ -9,15 +9,16 @@ import (
 // User Model
 type User struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	Email     string             `json:"email"`
-	Password  string             `json:"password"`
-	FirstName string             `json:"firstName"`
-	LastName  string             `json:"lastName"`
-	UserName  string             `json:"userName"`
-	Punyas    int                `json:"punyas"`
-	Vasus     int                `json:"vasus"`
-	CreatedAt time.Time          `json:"createdAt"`
-	UpdatedAt time.Time          `json:"updatedAt"`
+	Email     string             `bson:"email" json:"email" binding:"required,email"`
+	Password  string             `bson:"password" json:"password"`
+	FirstName string             `bson:"first_name" json:"firstName"`
+	LastName  string             `bson:"last_name" json:"lastName"`
+	UserName  string             `bson:"user_name" json:"userName"`
+	Punyas    int           	 `bson:"punyas" json:"punyas"`
+	Vasus     int           	 `bson:"vasus" json:"vasus"`
+	Sutras    []Sutra            `bson:"sutras" json:"sutras"`
+	CreatedAt time.Time          `bson:"created_at" json:"createdAt"`
+	UpdatedAt time.Time          `bson:"updated_at" json:"updatedAt"`
 }
 
 // SignupRequest Model
@@ -52,31 +53,16 @@ type SuccessResponse struct {
 	Data    interface{} `json:"data"`
 }
 
-// Patha Model
-type Patha struct {
-	Title   string  `json:"title"`
-	Content []Verse `json:"content"`
-	MinVasu int     `json:"minVasu"`
-}
-
-// Sutra Model
-type Sutra struct {
-	Quizes     []Quiz      `json:"quizes"`
-	FillIts    []FillIt    `json:"fillIts"`
-	Translates []Translate `json:"translates"`
-	MinVasu    int         `json:"minVasu"`
-}
-
 // Verse Model
 type Verse struct {
 	Subtitle    string `json:"subtitle"`
 	Description string `json:"description"`
 }
 
-// Quiz Model
-type Quiz struct {
-	Question string   `json:"question"`
-	Options  []Option `json:"options"`
+type Patha struct {
+	Title 	string 	`json:"title"`
+	Content []Verse `json:"content"`
+	Status 	bool 	`json:"status"`
 }
 
 // Option Model
@@ -85,16 +71,10 @@ type Option struct {
 	Text string `json:"text"`
 }
 
-// FillIt Model
-type FillIt struct {
-	Sentence string `json:"sentence"`
-	Answer   string `json:"answer"`
-}
-
-// Translate Model
-type Translate struct {
-	Sentence string   `json:"sentence"`
-	Blocks   []string `json:"blocks"`
+type Quiz struct {
+	Question string 	`json:"question"`
+	Options []Option 	`json:"options"`
+	Status 	bool 		`json:"status"`
 }
 
 type Chars struct {
@@ -106,10 +86,39 @@ type Chars struct {
 
 type CWord struct {
 	Chars []Chars `json:"chars"`
+	Orient 	string 	`json:"orient"`
 	Word  string  `json:"word"`
 }
 
 type Crossword struct {
-	C_Word CWord  `json:"c_word"`
-	Orient string `json:"orient"`
+	C_Words []CWord	`json:"c_word"`
+	Status 	bool 	`json:"status"`
+}
+
+type FillUp struct {
+	Sentence string `json:"sentence"`
+	Blank_At int 	`json:"blank_at"`
+	Answer 	 string `json:"answer"`
+	Status 	bool 	`json:"status"`
+}
+
+type S_Word struct {
+	ID 		string 		`json:"s_word_id"`
+	Text 	string 		`json:"text"`
+	Posn 	int 		`json:"posn"`
+}
+
+type Translate struct {
+	Sentence string 	`json:"sentence"`
+	Words 	[]S_Word 	`json:"words"`
+	Order 	[]string 	`json:"order"`
+	Status 	bool 		`json:"status"`
+}
+
+type Sutra struct {
+	Level 	int 		`json:"level"`
+	Quizzes []Quiz 		`json:"quizzes"`
+	Crossword Crossword `json:"crossword"`
+	FillUps	[]FillUp 	`json:"fillUps"`
+	Status 	bool 		`json:"status"`
 }
