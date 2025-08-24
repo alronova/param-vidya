@@ -1,6 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 8080;
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Your frontend's URL
+  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 // Sample JSON data for different endpoints
 const sampleHealth = {
@@ -50,6 +57,8 @@ app.post('/api/auth/signup', (req, res) => {
 
 app.post('/api/auth/login', (req, res) => {
     res.json(sampleLoginResponse);
+    console.log("Login endpoint hit");
+    res.status(200);
 });
 
 // Add more routes as needed similarly
