@@ -5,6 +5,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import backgroundImage from '../assets/image.jpg';
+import clg from "../assets/clg.svg";
 
 const AnimatedTitle = styled(Typography)(({ theme }) => ({
     fontWeight: 700,
@@ -27,16 +28,17 @@ const AnimatedButton = styled(Button)(({ theme }) => ({
     fontSize: "1.1rem",
     padding: theme.spacing(1.5, 4),
     fontFamily: "'Philosopher', sans-serif",
-    background: "linear-gradient(135deg, #FFE1A8 10%, #FFCA66 50%, #FFE1A8 90%)",
+    background: "linear-gradient(135deg, #FFE1A8 10%, #fad082ff 50%, #FFE1A8 90%)",
     color: "#472D30",
     boxShadow: "0 6px 12px rgba(143, 3, 4, 0.15)",
     borderRadius: 30,
+    border: "1px solid #8F0304",
     letterSpacing: "0.03em",
     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
     backdropFilter: "blur(6px)",
     WebkitBackdropFilter: "blur(6px)",
     "&:hover": {
-        boxShadow: "0 12px 24px rgba(143, 3, 4, 0.25)",
+        boxShadow: "0 8px 24px rgba(143, 3, 4, 0.25)",
         transform: "translateY(-4px) scale(1.07)",
         color: "#8F0304",
         "& .MuiSvgIcon-root": {
@@ -78,6 +80,20 @@ function Home() {
             height: 180,
             width: "auto"
           }}
+        />
+      </Box>
+
+      {/* Clg top-left */}
+      <Box
+        position="absolute"
+        top={30}
+        left={40}
+        sx={{ zIndex: 10 }}
+      >
+        <img
+          src={clg}
+          alt="IIT Roorkee"
+          style={{ height: 120, width: "auto" }}
         />
       </Box>
 

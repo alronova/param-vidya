@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import { useState, useEffect } from "react";
-import { handleError } from "./utils";
+import { toast } from "react-toastify";
 
 function ProtectedRoute({ children }) {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -11,22 +10,8 @@ function ProtectedRoute({ children }) {
       const token = localStorage.getItem("ACCESS_TOKEN");
       if (!token) {
         setIsAuthorized(false);
-        return;
-      }
-      try {
-        const decoded = jwtDecode(token);
-        const tokenExpiration = decoded.exp;
-        const now = Date.now() / 1000;
-
-        if (tokenExpiration < now) {
-          handleError("Your session has expired. Please log in again.");
-          setIsAuthorized(false);
-        } else {
-          setIsAuthorized(true);
-        }
-      } catch (err) {
-        handleError("Invalid session. Please log in again.");
-        setIsAuthorized(false);
+      } else {
+        setIsAuthorized(true);
       }
     };
     auth();
@@ -38,5 +23,17 @@ function ProtectedRoute({ children }) {
 
   return isAuthorized ? children : <Navigate to="/login" replace />;
 }
+
+export const handleSuccess = (msg) => {
+  toast.success(msg, {
+    position: "top-right",
+  });
+};
+
+export const handleError = (msg) => {
+  toast.error(msg, {
+    position: "top-right",
+  });
+};
 
 export default ProtectedRoute;
