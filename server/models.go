@@ -56,6 +56,7 @@ type SuccessResponse struct {
 type Patha struct {
 	Title   string  `json:"title"`
 	Content []Verse `json:"content"`
+	MinVasu int     `json:"minVasu"`
 }
 
 // Sutra Model
@@ -63,6 +64,7 @@ type Sutra struct {
 	Quizes     []Quiz      `json:"quizes"`
 	FillIts    []FillIt    `json:"fillIts"`
 	Translates []Translate `json:"translates"`
+	MinVasu    int         `json:"minVasu"`
 }
 
 // Verse Model

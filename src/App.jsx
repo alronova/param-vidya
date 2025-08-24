@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Sutra from "./pages/Sutra";
 import Veda from "./pages/Veda";
-import Leaderboard from "./components/Leaderboard";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
