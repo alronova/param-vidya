@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -11,6 +12,7 @@ import {
 import { styled } from "@mui/material/styles";
 import logo from "../assets/logo.png";
 import backgroundImage from "../assets/image.jpg";
+import clg from "../assets/clg.svg";
 
 const Title = styled(Typography)(({ theme }) => ({
   fontFamily: "'Philosopher', sans-serif",
@@ -19,27 +21,30 @@ const Title = styled(Typography)(({ theme }) => ({
   color: "#472D30",
   marginBottom: theme.spacing(4),
 }));
-
 const FormButton = styled(Button)(({ theme }) => ({
   fontFamily: "'Philosopher', sans-serif",
   fontWeight: 600,
   textTransform: "none",
   fontSize: "1.1rem",
   padding: theme.spacing(1.5, 4),
-  background: "linear-gradient(135deg, #FFE1A8 10%, #FFCA66 50%, #FFE1A8 90%)",
-  color: "#472D30",
-  boxShadow: "0 6px 12px rgba(143, 3, 4, 0.15)",
-  borderRadius: 30,
-  letterSpacing: "0.03em",
-  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+  border: "2px solid #8F0304",
+  borderRadius: 0, // square corners
+  backgroundColor: "transparent",
+  color: "#8F0304",
+  transition: "background-color 0.4s ease, color 0.4s ease, transform 0.3s ease",
+  cursor: "pointer",
+
   "&:hover": {
-    boxShadow: "0 12px 24px rgba(143, 3, 4, 0.25)",
-    transform: "translateY(-4px) scale(1.07)",
-    color: "#8F0304",
+    backgroundColor: "#8F0304",
+    color: "#F7F0F5",
+    transform: "translateY(-3px)",
   },
 }));
 
+
+
 function Login() {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
@@ -97,8 +102,8 @@ function Login() {
         // Store JWT token in localStorage
         localStorage.setItem("ACCESS_TOKEN", data.token || data.data.token);
 
-        alert("Login successful!");
-        // Redirect or further logic here, e.g. navigate("/dashboard")
+        alert(localStorage.getItem("ACCESS_TOKEN"));
+        navigate("/dashboard");
       } else {
         // Prepare SignupRequest payload
         const signupPayload = {
@@ -145,14 +150,28 @@ function Login() {
       {/* Logo top-right */}
       <Box
         position="absolute"
-        top={20}
+        top={0}
         right={20}
-        sx={{ zIndex: 10 }}
+        sx={{ zIndex: 10, display: { xs: "none", sm: "block" } }}
       >
         <img
           src={logo}
           alt="Param Vidya Logo"
-          style={{ height: 100, width: "auto" }}
+          style={{ height: 180, width: "auto" }}
+        />
+      </Box>
+
+      {/* Clg top-left */}
+      <Box
+        position="absolute"
+        top={30}
+        left={40}
+        sx={{ zIndex: 10, display: { xs: "none", sm: "block" } }}
+      >
+        <img
+          src={clg}
+          alt="IIT Roorkee"
+          style={{ height: 120, width: "auto" }}
         />
       </Box>
 
